@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>第一题</title>
+</head>
+<script>
+	window.onload = function(){
+		//打开浏览器
+		var xhr = new XMLHttpRequest();
+	    //在地址栏输入地址
+		xhr.open('post','echo.php',true);
+		//提交
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		xhr.send();
+		//等待浏览器回应
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4){
+				if(xhr.status==200){
+					console.log(xhr.responseText);
+					var date = JSON.parse(xhr.responseText);
+					var info = date.data.travelers;
+					console.log(Object.prototype.toString.call(info));
+
+		            //动态创建元素；
+		            //第一层ul:
+		            var ul1 = document.createElement("ul");
+		            ul1.className = "e_focus_slides clrfix";
+		            document.body.appendChild(ul1);
+		            //创建li并将li插入ul:
+		            var li1 = document.createElement("li");
+		            li1.className = "slides-list fl";
+		            ul1.appendChild(li1);
+                       
+                    //创建ul并将其插入li:
+   		            var ul2 = document.createElement("ul");
+   		            ul2.className = "page clrfix";       
+   		            li1.appendChild(ul2);
+   		            //创建ul内的4个li及其包含的内容:
+   		            for(var i=0;i<info.length;i++){
+   		            	//用for循环依次个li:
+   		            	var li = document.createElement("li");
+   		            	li.className = "page-list fl";
+                           
+                        //创建div:
+   		   	            var div = document.createElement("div");
+   		   	            div.className = "favicon";
+                           
+                        //将div插入li:
+              			li.appendChild(div);
+              			//创建img和span:
+              			var img = document.createElement("img");
+              			img.src = info[i].userImg;
+              			img.alt = "";
+              			var span = document.createElement("span");
+              			span.className = "zhezhao pngfix"
+                       
+                        //将img和span放入div
+              			div.appendChild(img);
+   		   	            div.appendChild(span);
+                           
+                        //创建p并将其放入li:
+   		   	            var p = document.createElement("p");
+   		   	            p.className = "userName";
+   		   	            p.innerHTML = info[i].nickName; 
+   		   	            li.appendChild(p);
+                           
+                        //将整个li放入ul中：
+   		   	            ul2.appendChild(li);
+		            }
+				}else{
+					alert("出错了，亲");
+				}
+				
+			}
+		}
+	}
+</script>
+<style>
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	li{
+		list-style: none;
+	}
+</style>
+<body>
+</body>
+</html>
