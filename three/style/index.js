@@ -16,7 +16,8 @@ window.onload = function(){
 	var iTimer2 = null;
 
 	oUl.style.width = aImg.length*imgWidth + "px";
-
+    
+    iTimer1 = setInterval(toNextRun,2000);
     oPrev.onclick = function(){
     	clearInterval(iTimer1);
         clearInterval(iTimer2);
