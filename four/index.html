@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">发送ajax请求</button>
+</body>
+<script type="text/javascript" src="./ajax.js"></script>
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', load);
+
+	function load(){
+		var count = 2;  //计数
+		var btn = document.querySelector('#btn');
+		btn.addEventListener('click', function(){
+			send.call(this);
+		});
+
+		function send(){
+			var self = this;
+			this.innerHTML = '发送' + count + '次';
+			ajax.send({
+				method : 'POST',
+				url : './res.php',
+				data : {
+					"name" : 'jsdb'
+				}
+			});
+			ajax.send({
+				method : 'POST',
+				url : './res.php',
+				data : {
+					"name" : 'jsdb'
+				}
+			});
+			count += 2;
+		}
+	}
+</script>
+</html>
